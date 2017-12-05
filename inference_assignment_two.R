@@ -45,5 +45,5 @@ for (i in 1:n){
 }
 
 #view histogram for the values of the intercept
-hist(inference[, 1])
-  
+intercept = inference[,1]
+hist(intercept)
