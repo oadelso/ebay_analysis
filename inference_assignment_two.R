@@ -18,6 +18,8 @@ rmse_test = sqrt(mean(predict(chosen_model, df_test) - df_test$price)**2)
 #get probabilty values, and sort them
 p_vals = summary(chosen_model)$coefficients[, 4]
 p_vals = sort(p_vals)
+
+#set up the values for the line alpha*j/(# of covariates)
 line = 0.05*seq(1:length(p_vals))/length(p_vals)
 boolean = ifelse(p_vals > line , 1, 0)
 
