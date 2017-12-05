@@ -1,6 +1,6 @@
 # Libraries
 library(tidyverse)
-library(ggplot)
+library(ggplot2)
 
 #load test data and review performance of model
 df_test = read.csv("mse226_df_test.csv", header = TRUE)
@@ -23,7 +23,7 @@ p_vals = sort(p_vals)
 line = 0.05*seq(1:length(p_vals))/length(p_vals)
 boolean = ifelse(p_vals > line , 1, 0)
 
-#plot
+#plot 1
 ggplot() + geom_line(aes(x=seq(1:285), y =line), color ='green') +
   geom_line(aes(x=seq(1:285), y = p_vals), color = 'red')
 
@@ -32,6 +32,10 @@ compare = cbind(p_vals, line, boolean)
 
 #print out the values which satisfy the BH inequality
 accept = compare[boolean == 0,]
+
+#plot 2
+ggplot() + geom_line(aes(x=seq(1:dim(accept)[1]), y =accept[,1]), color ='green') +
+  +     geom_line(aes(x=seq(1:dim(accept)[1]), y = accept[,2]), color = 'red')
 
 
 #sample from the data
