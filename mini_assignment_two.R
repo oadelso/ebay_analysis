@@ -3,7 +3,6 @@
 # Working directory & removing memory
 # ============================================================================================= #
 rm(list = objects())
-setwd(dir = getwd())
 
 # Libraries
 library(tidyverse)
@@ -23,23 +22,6 @@ df = read.csv("autos.csv", header = TRUE, colClasses = c("character", "character
                                                          "character", "character", "numeric",
                                                          "numeric", "character"), fileEncoding="latin1")
 
-# ============================================================================================= #
-# Count by covariates
-brands = summarise(group_by(df, brand), number_of_cars = n())
-#types = summarise(group_by(df, vehicleType), number_of_cars = n())
-#sellers = summarise(group_by(df, seller), number_of_cars = n())
-#offer = summarise(group_by(df, offerType), number_of_cars = n())
-#gearbox = summarise(group_by(df, gearbox), number_of_cars = n())
-#abtest = summarise(group_by(df, abtest), number_of_cars = n())
-#year = summarise(group_by(df, yearOfRegistration), number_of_cars = n())
-#power = summarise(group_by(df, powerPS), number_of_cars = n())
-#model = summarise(group_by(df, model), number_of_cars = n())
-#km = summarise(group_by(df, kilometer), number_of_cars = n())
-#month = summarise(group_by(df, monthOfRegistration), number_of_cars = n())
-#fuel = summarise(group_by(df, fuelType), number_of_cars = n())
-#damage = summarise(group_by(df, notRepairedDamage), number_of_cars = n())
-#price = summarise(group_by(df, price), number_of_cars = n())
-# ============================================================================================= #
 
 # Seller Translation
 df$seller[df$seller == "privat"] = "Private"
@@ -116,33 +98,6 @@ df = filter(df, price < 300000 & price > 1000)
 
 df = select(df, price, brand, kilometer, age, powerPS, gearbox, vehicleType, fuelType, 
             seller, notRepairedDamage, boolean) #postalCode, model,boolean)
-# ============================================================================================= #
-
-# Data visualisation
-#df = filter(df, yearOfRegistration > 1990 & yearOfRegistration < 2018)
-#df = filter(df, price < 100000 & price > 1000)
-
-in.visu = sample(nrow(df), size = 10000)
-subset = df[in.visu, ]
-pairs(subset[, c("price", "kilometer", "age", "powerPS")], 
-      main = "Covariance Graph of the Quantitative Covariates")
-
-## Plotting data
-# Main Plot
-ggplot(data = subset, mapping = aes(x = age, y = price), 
-       show.legend = TRUE) +
-  
-  # Changing colour by Grade and shape by City
-  geom_point(mapping = aes(color = kilometer))+ 
-  
-  # Separating on cases
-  facet_wrap(~vehicleType) +
-  
-  
-  # Adding a centered title
-  ggtitle("Correlation Graph of Price vs Age segmented by Kilometer and Type of Vehicle") + 
-  theme(plot.title = element_text(hjust = 0.5))
-# ============================================================================================= #
 
 ## Prediction task
 # Train/Test
