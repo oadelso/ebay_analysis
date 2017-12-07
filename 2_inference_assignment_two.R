@@ -7,7 +7,7 @@ df_test = read.csv("mse226_df_test.csv", header = TRUE)
 df_cont = read.csv("mse226_df_train.csv", header = TRUE)
 df_test = select(df_test, -(boolean))
 
-#run the regression on the df_test
+#run the regression on the df_cont (i.e. training set)
 chosen_model = lm(formula = price ~ age + kilometer + powerPS + vehicleType + brand + brand:vehicleType +
                   age:vehicleType + I(age^2):vehicleType, data = df_cont)
 
