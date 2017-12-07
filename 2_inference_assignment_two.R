@@ -4,6 +4,7 @@ library(ggplot2)
 
 #load test data and review performance of model
 df_test = read.csv("mse226_df_test.csv", header = TRUE)
+df_cont = read.csv("mse226_df_train.csv", header = TRUE)
 df_test = select(df_test, -(boolean))
 
 #run the regression on the df_test
