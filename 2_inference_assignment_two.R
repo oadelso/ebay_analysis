@@ -5,7 +5,9 @@ library(ggplot2)
 #load test data and review performance of model
 df_test = read.csv("mse226_df_test.csv", header = TRUE)
 df_cont = read.csv("mse226_df_train.csv", header = TRUE)
+#remove boolean column
 df_test = select(df_test, -(boolean))
+df_cont = select(df_cont, -(boolean))
 
 #run the regression on the df_cont (i.e. training set)
 chosen_model = lm(formula = price ~ age + kilometer + powerPS + vehicleType + brand + brand:vehicleType +
