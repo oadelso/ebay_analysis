@@ -8,7 +8,7 @@ df_test = select(df_test, -(boolean))
 
 #run the regression on the df_test
 chosen_model = lm(formula = price ~ age + kilometer + powerPS + vehicleType + brand + brand:vehicleType +
-                  age:vehicleType + I(age^2):vehicleType, data = df_test)
+                  age:vehicleType + I(age^2):vehicleType, data = df_cont)
 
 #get RMSE values
 rmse_test = sqrt(mean((predict(chosen_model, df_test) - df_test$price)**2))
