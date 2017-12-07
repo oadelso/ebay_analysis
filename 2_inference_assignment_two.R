@@ -11,7 +11,7 @@ chosen_model = lm(formula = price ~ age + kilometer + powerPS + vehicleType + br
                   age:vehicleType + I(age^2):vehicleType, data = df_test)
 
 #get RMSE values
-rmse_test = sqrt(mean(predict(chosen_model, df_test) - df_test$price)**2)
+rmse_test = sqrt(mean((predict(chosen_model, df_test) - df_test$price)**2))
 
 ##start with inference
 #Bejamin Hochberg
